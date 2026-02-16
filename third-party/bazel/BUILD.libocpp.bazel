@@ -1,3 +1,5 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
 exports_files(["config"])
 
 cc_library(
@@ -44,7 +46,7 @@ cc_library(
     copts = [
         "-std=c++17",
         "-Wimplicit-fallthrough",
-        "-Werror=switch-enum",
+        "-Wno-error=switch-enum",  # boost.date_time 1.87.0 has incomplete switch statements
     ],
     defines = [
         "LIBOCPP_ENABLE_V16=1",
