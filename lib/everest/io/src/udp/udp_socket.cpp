@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Copyright 2020 - 2025 Pionix GmbH and Contributors to EVerest
+// Copyright 2020 - 2026 Pionix GmbH and Contributors to EVerest
 
 #include "everest/io/udp/udp_payload.hpp"
 #include <everest/io/event/fd_event_handler.hpp>
@@ -125,6 +125,30 @@ bool udp_client_socket::rx(udp_payload& payload) {
         payload.set_message(rx_buffer.data(), msg_size);
     }
     return result.has_value();
+}
+
+//////////////////////////////////////////////////
+
+bool udp_server_socket::open(uint16_t port) {
+    return open_as_server(port);
+}
+
+bool udp_server_socket::tx(udp_payload const& payload) {
+    if (not m_last_source) {
+        return false;
+    }
+    return tx_impl(payload.buffer.data(), payload.size(), *m_last_source);
+}
+
+bool udp_server_socket::rx(udp_payload& payload) {
+    ssize_t msg_size = 0;
+    auto result = rx_impl(rx_buffer.data(), rx_buffer.size(), msg_size);
+    if (not result) {
+        return false;
+    }
+    payload.set_message(rx_buffer.data(), msg_size);
+    m_last_source = result;
+    return true;
 }
 
 } // namespace everest::lib::io::udp

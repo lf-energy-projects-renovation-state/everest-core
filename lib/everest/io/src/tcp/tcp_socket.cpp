@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Copyright 2020 - 2025 Pionix GmbH and Contributors to EVerest
+// Copyright 2020 - 2026 Pionix GmbH and Contributors to EVerest
 #include <chrono>
 #include <everest/io/socket/socket.hpp>
 #include <everest/io/tcp/tcp_socket.hpp>
@@ -16,7 +16,7 @@ bool tcp_socket::open(std::string const& remote, uint16_t port) {
         auto socket = socket::open_tcp_socket_with_timeout(remote, port, m_timeout_ms);
         socket::set_non_blocking(socket);
         m_fd = std::move(socket);
-        return socket::get_pending_error(socket) == 0;
+        return socket::get_pending_error(m_fd) == 0;
     } catch (...) {
     }
     return false;

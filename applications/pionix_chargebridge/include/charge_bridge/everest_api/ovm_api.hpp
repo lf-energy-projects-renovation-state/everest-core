@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
-// Copyright 2020 - 2025 Pionix GmbH and Contributors to EVerest
+// Copyright 2020 - 2026 Pionix GmbH and Contributors to EVerest
 #pragma once
 
 #include <chrono>
 #include <cstdint>
 #include <everest/io/event/fd_event_register_interface.hpp>
 #include <everest/io/event/timer_fd.hpp>
+#include <everest_api_types/evse_manager/API.hpp>
 #include <everest_api_types/over_voltage_monitor/API.hpp>
 #include <everest_api_types/utilities/Topics.hpp>
 #include <functional>
@@ -18,7 +19,7 @@ namespace charge_bridge::evse_bsp {
 namespace API_OVM = everest::lib::API::V1_0::types::over_voltage_monitor;
 
 struct evse_ovm_config {
-    bool enabled;
+    bool enabled{false};
     std::string module_id;
 };
 

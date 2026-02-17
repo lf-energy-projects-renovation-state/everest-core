@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Copyright 2020 - 2025 Pionix GmbH and Contributors to EVerest
+// Copyright 2020 - 2026 Pionix GmbH and Contributors to EVerest
 #include "charge_bridge/charge_bridge.hpp"
 #include "charge_bridge/utilities/string.hpp"
 #include <algorithm>
@@ -71,7 +71,7 @@ void signal_handler(int signum) {
 }
 
 int main(int argc, char* argv[]) {
-    std::cout << "PIONIX ChargeBridge (c) 2025\n" << std::endl;
+    std::cout << "PIONIX ChargeBridge (C) 2025-2026\n" << std::endl;
 
     std::signal(SIGINT, signal_handler);
     std::signal(SIGHUP, signal_handler);
